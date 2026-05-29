@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bookshelf – Borrow. Connect. Sustain.</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Lucide thin-line icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <!-- Leaflet.js for the map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="logo">Bookshelf<span class="logo-heart">♥</span></a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#browse">Browse Books</a></li>
+        <li><a href="#map">Map</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#premium">Premium</a></li>
+        <li><a href="#" class="btn-nav">Sign Up Free</a></li>
+      </ul>
+      <button class="hamburger" onclick="toggleMenu()">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-sparkle">✦ ✦ ✦</div>
+      <h1 class="hero-logo">Bookshelf</h1>
+      <p class="hero-tagline">Find Books near you to borrow for a fair price!</p>
+      <p class="hero-sub">Bookshelf connects readers in your area. Borrow books from real people, track your reading journey, and join a community that shares your love for books — all in one place.</p>
+      <div class="hero-buttons">
+        <a href="#browse" class="btn-primary">Browse Books</a>
+        <a href="#features" class="btn-secondary">Learn More</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>12,400+</strong><span>Books Available</span></div>
+        <div class="stat"><strong>3,200+</strong><span>Active Readers</span></div>
+        <div class="stat"><strong>850+</strong><span>Local Bookshelves</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURES SECTION ===== -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2>Everything You Need to Read Smarter</h2>
+      <p class="section-subtitle">One app. Three branches. Infinite stories.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="book-open"></i></div>
+          <h3>Borrow &amp; Lend</h3>
+          <p>Upload books you own and borrow from readers nearby. Books are shipped with package tracking and returned within one week.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="map"></i></div>
+          <h3>Map &amp; Local Bookshelves</h3>
+          <p>Find books and public bookshelves within a 50 km radius. Discover what's available in your neighbourhood right now.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="message-circle"></i></div>
+          <h3>Private Chat</h3>
+          <p>Contact book owners directly to arrange borrowing. Safe, simple, and built right into the app.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="bar-chart-2"></i></div>
+          <h3>Reading Tracker</h3>
+          <p>Track your reading progress, set goals, and see your stats grow. Build a healthy reading habit one book at a time.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="users"></i></div>
+          <h3>Book Clubs</h3>
+          <p>Create or join book clubs with group chats, shared recommendations, and reading progress updates.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i data-lucide="leaf"></i></div>
+          <h3>Sustainability First</h3>
+          <p>Every borrowed book is one less book bought new. Bookshelf extends the life of every story and reduces unnecessary consumption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BROWSE BOOKS SECTION ===== -->
+  <section class="browse" id="browse">
+    <div class="container">
+      <h2>Browse Available Books</h2>
+      <p class="section-subtitle">Real books from real readers near you</p>
+
+      <!-- Search & Filter Bar -->
+      <div class="search-bar">
+        <div class="search-input-wrap">
+          <i data-lucide="search" class="search-icon"></i>
+          <input type="text" id="searchInput" placeholder="Search by title, author, or genre..." oninput="filterBooks()" />
+        </div>
+        <select id="genreFilter" onchange="filterBooks()">
+          <option value="">All Genres</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+          <option value="Self-Help">Self-Help</option>
+          <option value="Science">Science</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Romance">Romance</option>
+        </select>
+        <select id="availFilter" onchange="filterBooks()">
+          <option value="">All Status</option>
+          <option value="available">Available</option>
+          <option value="borrowed">Borrowed</option>
+        </select>
+      </div>
+
+      <!-- Book Grid -->
+      <div class="book-grid" id="bookGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== SWIPE FEATURE (PREMIUM PREVIEW) ===== -->
+  <section class="swipe-section" id="swipe">
+    <div class="container">
+      <div class="swipe-wrapper">
+        <div class="swipe-text">
+          <span class="premium-badge"><i data-lucide="star"></i> PREMIUM FEATURE</span>
+          <h2>Swipe Feature So You Can Find Your New Favourite Books Even Quicker</h2>
+          <p>Like Tinder — but for books. Swipe right on covers that catch your eye, swipe left to skip. Bookshelf learns your taste and sends you a notification when a matching book becomes available.</p>
+          <a href="#premium" class="btn-primary">Unlock with Premium</a>
+        </div>
+        <div class="swipe-demo">
+          <div class="swipe-card" id="swipeCard">
+            <div class="swipe-cover" id="swipeCover">
+              <i data-lucide="heart" class="swipe-heart-icon"></i>
+            </div>
+            <div class="swipe-info">
+              <h4 id="swipeTitle">The Midnight Library</h4>
+              <p id="swipeAuthor">Matt Haig · Fiction</p>
+            </div>
+            <div class="swipe-buttons">
+              <button class="swipe-no" onclick="swipeBook('left')"><i data-lucide="x"></i> Skip</button>
+              <button class="swipe-yes" onclick="swipeBook('right')"><i data-lucide="heart"></i> Interested</button>
+            </div>
+          </div>
+          <p class="swipe-hint" id="swipeHint">Try swiping!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MAP SECTION ===== -->
+  <section class="map-section" id="map">
+    <div class="container">
+      <h2>Find Books Near You</h2>
+      <p class="section-subtitle">Discover local bookshelves and available books within 50 km</p>
+      <div class="map-wrapper">
+        <div id="leafletMap"></div>
+        <div class="map-legend">
+          <h4>Map Legend</h4>
+          <div class="legend-item"><span class="dot green"></span> Public Bookshelf</div>
+          <div class="legend-item"><span class="dot blue"></span> User with Books</div>
+          <div class="legend-item"><span class="dot pink"></span> Your Location</div>
+          <p class="map-note">
+            <i data-lucide="shield" style="width:13px;height:13px;vertical-align:middle;margin-right:4px;"></i>
+            For privacy, user locations are approximate — not exact addresses.
+          </p>
+          <div class="map-stats">
+            <div><strong>12</strong> bookshelves nearby</div>
+            <div><strong>47</strong> users sharing books</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMMUNITY / BOOK CLUBS ===== -->
+  <section class="community" id="community">
+    <div class="container">
+      <h2>Join the Community</h2>
+      <p class="section-subtitle">Follow readers, join book clubs, share your journey</p>
+      <div class="community-grid">
+
+        <div class="profile-card">
+          <div class="profile-avatar"><i data-lucide="user-circle"></i></div>
+          <div class="profile-info">
+            <h4>Sophie M.</h4>
+            <span class="badge gold"><i data-lucide="heart"></i> Bookworm</span>
+            <p>42 books borrowed · 18 lent</p>
+            <div class="reading-bar">
+              <div class="reading-progress" style="width: 72%"></div>
+            </div>
+            <small>Reading goal: 72% complete</small>
+          </div>
+          <button class="btn-follow">+ Follow</button>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-avatar"><i data-lucide="user-circle"></i></div>
+          <div class="profile-info">
+            <h4>Leon K.</h4>
+            <span class="badge silver"><i data-lucide="book"></i> Reader</span>
+            <p>21 books borrowed · 9 lent</p>
+            <div class="reading-bar">
+              <div class="reading-progress" style="width: 45%"></div>
+            </div>
+            <small>Reading goal: 45% complete</small>
+          </div>
+          <button class="btn-follow">+ Follow</button>
+        </div>
+
+        <div class="club-card">
+          <div class="club-header">
+            <span class="club-icon"><i data-lucide="library"></i></span>
+            <div>
+              <h4>Berlin Sci-Fi Club</h4>
+              <small>34 members · Active</small>
+            </div>
+          </div>
+          <p>Monthly reads, group discussions, and book swaps. Currently reading: <em>Dune</em> by Frank Herbert.</p>
+          <div class="club-books">
+            <span>Sci-Fi</span><span>Dystopia</span><span>Space</span>
+          </div>
+          <button class="btn-join">Join Club</button>
+        </div>
+
+        <div class="club-card">
+          <div class="club-header">
+            <span class="club-icon"><i data-lucide="book-heart"></i></span>
+            <div>
+              <h4>Cozy Reads Hamburg</h4>
+              <small>19 members · Active</small>
+            </div>
+          </div>
+          <p>Romance, contemporary fiction, and feel-good books. A warm community for all readers.</p>
+          <div class="club-books">
+            <span>Romance</span><span>Cozy</span><span>Feel-Good</span>
+          </div>
+          <button class="btn-join">Join Club</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== READING STATS ===== -->
+  <section class="stats-section">
+    <div class="container">
+      <h2>Track Your Reading Journey</h2>
+      <p class="section-subtitle">Set goals, track progress, earn badges</p>
+      <div class="stats-demo">
+        <div class="stats-card">
+          <h4><i data-lucide="calendar" class="card-title-icon"></i> 2025 Reading Goal</h4>
+          <div class="goal-ring">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#fde8f2" stroke-width="10"/>
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#e891bb" stroke-width="10"
+                stroke-dasharray="220 314" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+            </svg>
+            <div class="ring-label"><strong>11</strong><span>of 20 books</span></div>
+          </div>
+        </div>
+        <div class="stats-card">
+          <h4><i data-lucide="award" class="card-title-icon"></i> Your Badges</h4>
+          <div class="badges-grid">
+            <div class="badge-item earned" title="Borrowed 5 books">Bookworm</div>
+            <div class="badge-item earned" title="Lent 3 books">Sharer</div>
+            <div class="badge-item earned" title="Joined a book club">Club Member</div>
+            <div class="badge-item locked" title="Borrow 25 books">
+              <i data-lucide="lock" style="width:12px;height:12px;"></i> Bibliophile
+            </div>
+            <div class="badge-item locked" title="Read 50 books">
+              <i data-lucide="lock" style="width:12px;height:12px;"></i> Legend
+            </div>
+          </div>
+        </div>
+        <div class="stats-card">
+          <h4><i data-lucide="leaf" class="card-title-icon"></i> Your Impact</h4>
+          <div class="impact-list">
+            <div class="impact-item"><span class="impact-num">11</span><span>books reused</span></div>
+            <div class="impact-item"><span class="impact-num">~€165</span><span>saved vs. buying</span></div>
+            <div class="impact-item"><span class="impact-num">~22 kg</span><span>CO₂ avoided</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PREMIUM SECTION ===== -->
+  <section class="premium" id="premium">
+    <div class="container">
+      <h2>Go Premium</h2>
+      <p class="section-subtitle">Unlock the full Bookshelf experience</p>
+      <div class="pricing-grid">
+
+        <div class="pricing-card free">
+          <h3>Free</h3>
+          <div class="price">€0<span>/month</span></div>
+          <ul>
+            <li class="li-yes"><i data-lucide="check"></i> Browse &amp; borrow books</li>
+            <li class="li-yes"><i data-lucide="check"></i> 50 km radius map</li>
+            <li class="li-yes"><i data-lucide="check"></i> Private chat</li>
+            <li class="li-yes"><i data-lucide="check"></i> Reading tracker</li>
+            <li class="li-yes"><i data-lucide="check"></i> Join book clubs</li>
+            <li class="li-no"><i data-lucide="x"></i> Swipe feature</li>
+            <li class="li-no"><i data-lucide="x"></i> Extended radius (all Germany)</li>
+            <li class="li-no"><i data-lucide="x"></i> Smart notifications</li>
+            <li class="li-no"><i data-lucide="x"></i> EU-wide shipping</li>
+          </ul>
+          <a href="#" class="btn-secondary">Get Started</a>
+        </div>
+
+        <div class="pricing-card premium-plan popular">
+          <div class="popular-tag">MOST POPULAR</div>
+          <h3>Premium</h3>
+          <div class="price">€4.99<span>/month</span></div>
+          <ul>
+            <li class="li-yes"><i data-lucide="check"></i> Everything in Free</li>
+            <li class="li-yes"><i data-lucide="check"></i> Swipe to discover books</li>
+            <li class="li-yes"><i data-lucide="check"></i> Extended radius (all Germany)</li>
+            <li class="li-yes"><i data-lucide="check"></i> Smart book notifications</li>
+            <li class="li-yes"><i data-lucide="check"></i> EU-wide shipping</li>
+            <li class="li-yes"><i data-lucide="check"></i> Profile status badges</li>
+            <li class="li-yes"><i data-lucide="check"></i> Priority support</li>
+          </ul>
+          <a href="#" class="btn-primary">Start Free Trial</a>
+        </div>
+
+        <div class="pricing-card student">
+          <div class="student-tag">STUDENT DISCOUNT</div>
+          <h3>Student</h3>
+          <div class="price">€2.99<span>/month</span></div>
+          <ul>
+            <li class="li-yes"><i data-lucide="check"></i> All Premium features</li>
+            <li class="li-yes"><i data-lucide="check"></i> Verified student badge</li>
+            <li class="li-yes"><i data-lucide="check"></i> Extra reading goal tools</li>
+          </ul>
+          <a href="#" class="btn-primary">Verify &amp; Save</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EBAY PARTNERSHIP ===== -->
+  <section class="partnership">
+    <div class="container partnership-inner">
+      <div class="partner-text">
+        <span class="partner-badge"><i data-lucide="handshake"></i> Official Partner</span>
+        <h2>Can't Find It to Borrow? Buy It Sustainably.</h2>
+        <p>Bookshelf has partnered with eBay. If a book isn't available to borrow, you can jump directly to eBay to buy a second-hand copy — and eBay users can discover Bookshelf to lend books they already own.</p>
+        <a href="#" class="btn-primary">Explore on eBay <i data-lucide="arrow-right" style="width:16px;height:16px;vertical-align:middle;margin-left:4px;"></i></a>
+      </div>
+      <div class="partner-logo">
+        <div class="ebay-badge">ebay</div>
+        <p>× Bookshelf</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3>Bookshelf♥</h3>
+        <p>Borrow. Connect. Sustain.</p>
+        <p>Making reading more affordable, social, and sustainable — one book at a time.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#browse">Browse Books</a></li>
+          <li><a href="#premium">Premium</a></li>
+          <li><a href="#map">Map</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="#community">Book Clubs</a></li>
+          <li><a href="#">Help Centre</a></li>
+          <li><a href="#">Safety &amp; Trust</a></li>
+          <li><a href="#">Report a Violation</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Bookshelf. Made with ♥ for readers everywhere.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

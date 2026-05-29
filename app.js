@@ -13,7 +13,7 @@ const books = [
   { id: 11, title: "Educated",                author: "Tara Westover",      genre: "Non-Fiction",status: "borrowed",  distance: "7.2 km",  color: "#333333", provider: "nonficfan" },
   { id: 12, title: "The Name of the Wind",    author: "Patrick Rothfuss",   genre: "Fantasy",    status: "available", distance: "1.5 km",  color: "#111111", provider: "fantasyrealm" },
 ];
-
+ 
 // ===== RENDER BOOKS =====
 function renderBooks(list) {
   const grid = document.getElementById('bookGrid');

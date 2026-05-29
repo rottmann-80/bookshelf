@@ -191,11 +191,11 @@ function initMap() {
 
   // Users with books (blue) — approximate locations
   const users = [
-    { lat: 52.518, lng: 13.395, name: "Sophie M.",  books: 5 },
+    { lat: 52.518, lng: 13.395, name: "Sonja M.",  books: 5 },
     { lat: 52.525, lng: 13.415, name: "Leon K.",    books: 3 },
     { lat: 52.508, lng: 13.440, name: "Anna W.",    books: 8 },
     { lat: 52.540, lng: 13.390, name: "Max B.",     books: 2 },
-    { lat: 52.515, lng: 13.460, name: "Julia S.",   books: 6 },
+    { lat: 52.515, lng: 13.460, name: "Justin S.",   books: 6 },
   ];
 
   users.forEach(u => {

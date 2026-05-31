@@ -14,7 +14,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
- 
+
   <!-- ===== NAVIGATION ===== -->
   <nav class="navbar">
     <div class="nav-container">
@@ -56,7 +56,7 @@
   <section class="features" id="features">
     <div class="container">
       <h2>Everything You Need to Read Smarter</h2>
-      <p class="section-subtitle">One app. Infinite stories.</p>
+      <p class="section-subtitle">One app. Three branches. Infinite stories.</p>
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon"><i data-lucide="book-open"></i></div>
@@ -205,8 +205,8 @@
           <div class="profile-avatar"><i data-lucide="user-circle"></i></div>
           <div class="profile-info">
             <h4>Leon K.</h4>
-            <span class="badge silver"><i data-lucide="book"></i> Reader</span>
-            <p>21 books borrowed · 9 lent</p>
+            <span class="badge silver"><i data-lucide="book"></i> Beginner</span>
+            <p>4 books borrowed · 1 lent</p>
             <div class="reading-bar">
               <div class="reading-progress" style="width: 45%"></div>
             </div>
@@ -269,14 +269,35 @@
         <div class="stats-card">
           <h4><i data-lucide="award" class="card-title-icon"></i> Your Badges</h4>
           <div class="badges-grid">
-            <div class="badge-item earned" title="Borrowed 5 books">Bookworm</div>
-            <div class="badge-item earned" title="Lent 3 books">Sharer</div>
-            <div class="badge-item earned" title="Joined a book club">Club Member</div>
-            <div class="badge-item locked" title="Borrow 25 books">
-              <i data-lucide="lock" style="width:12px;height:12px;"></i> Bibliophile
+            <div class="badge-item earned">
+              <div class="badge-rosette">
+                <span class="badge-title">Beginner</span>
+                <span class="badge-range">0–5 books</span>
+              </div>
             </div>
-            <div class="badge-item locked" title="Read 50 books">
-              <i data-lucide="lock" style="width:12px;height:12px;"></i> Legend
+            <div class="badge-item earned">
+              <div class="badge-rosette">
+                <span class="badge-title">Sharer</span>
+                <span class="badge-range">5–25 books</span>
+              </div>
+            </div>
+            <div class="badge-item earned">
+              <div class="badge-rosette">
+                <span class="badge-title">Bookworm</span>
+                <span class="badge-range">25–50 books</span>
+              </div>
+            </div>
+            <div class="badge-item locked">
+              <div class="badge-rosette locked-rosette">
+                <span class="badge-title">Bibliophile</span>
+                <span class="badge-range">50–100 books</span>
+              </div>
+            </div>
+            <div class="badge-item locked">
+              <div class="badge-rosette locked-rosette">
+                <span class="badge-title">Legend</span>
+                <span class="badge-range">100+ books</span>
+              </div>
             </div>
           </div>
         </div>
@@ -297,69 +318,77 @@
     <div class="container">
       <h2>Go Premium</h2>
       <p class="section-subtitle">Unlock the full Bookshelf experience</p>
-      <div class="pricing-grid">
+      <div class="pricing-grid pricing-grid-4">
 
+        <!-- FREE -->
         <div class="pricing-card free">
-          <h3>Free</h3>
+          <h3>Free Trial</h3>
           <div class="price">€0<span>/month</span></div>
+          <p class="plan-note">Up to 5 books</p>
           <ul>
-            <li class="li-yes"><i data-lucide="check"></i> Browse &amp; borrow books</li>
+            <li class="li-yes"><i data-lucide="check"></i> Browse &amp; borrow up to 5 books</li>
             <li class="li-yes"><i data-lucide="check"></i> 50 km radius map</li>
             <li class="li-yes"><i data-lucide="check"></i> Private chat</li>
             <li class="li-yes"><i data-lucide="check"></i> Reading tracker</li>
             <li class="li-yes"><i data-lucide="check"></i> Join book clubs</li>
             <li class="li-no"><i data-lucide="x"></i> Swipe feature</li>
             <li class="li-no"><i data-lucide="x"></i> Extended radius (all Germany)</li>
-            <li class="li-no"><i data-lucide="x"></i> Smart notifications</li>
-            <li class="li-no"><i data-lucide="x"></i> EU-wide shipping</li>
+            <li class="li-no"><i data-lucide="x"></i> Priority support</li>
+            <li class="li-no"><i data-lucide="x"></i> Shipping included</li>
           </ul>
           <a href="#" class="btn-secondary">Get Started</a>
         </div>
 
+        <!-- PREMIUM -->
         <div class="pricing-card premium-plan popular">
           <div class="popular-tag">MOST POPULAR</div>
           <h3>Premium</h3>
-          <div class="price">€4.99<span>/month</span></div>
+          <div class="price">€5.99<span>/month</span></div>
+          <p class="plan-note">Shipping not included</p>
           <ul>
-            <li class="li-yes"><i data-lucide="check"></i> Everything in Free</li>
+            <li class="li-yes"><i data-lucide="check"></i> Unlimited books</li>
             <li class="li-yes"><i data-lucide="check"></i> Swipe to discover books</li>
             <li class="li-yes"><i data-lucide="check"></i> Extended radius (all Germany)</li>
-            <li class="li-yes"><i data-lucide="check"></i> Smart book notifications</li>
-            <li class="li-yes"><i data-lucide="check"></i> EU-wide shipping</li>
-            <li class="li-yes"><i data-lucide="check"></i> Profile status badges</li>
+            <li class="li-yes"><i data-lucide="check"></i> Germany-wide shipping</li>
             <li class="li-yes"><i data-lucide="check"></i> Priority support</li>
+            <li class="li-yes"><i data-lucide="check"></i> Profile status badges</li>
+            <li class="li-no"><i data-lucide="x"></i> Free shipping</li>
           </ul>
-          <a href="#" class="btn-primary">Start Free Trial</a>
+          <a href="#" class="btn-primary">Start Now</a>
         </div>
 
+        <!-- STUDENT -->
         <div class="pricing-card student">
           <div class="student-tag">STUDENT DISCOUNT</div>
-          <h3>Student</h3>
-          <div class="price">€2.99<span>/month</span></div>
+          <h3>Premium Student</h3>
+          <div class="price">€3.75<span>/month</span></div>
+          <p class="plan-note">Shipping not included</p>
           <ul>
             <li class="li-yes"><i data-lucide="check"></i> All Premium features</li>
             <li class="li-yes"><i data-lucide="check"></i> Verified student badge</li>
             <li class="li-yes"><i data-lucide="check"></i> Extra reading goal tools</li>
+            <li class="li-no"><i data-lucide="x"></i> Free shipping</li>
           </ul>
           <a href="#" class="btn-primary">Verify &amp; Save</a>
         </div>
 
-      </div>
-    </div>
-  </section>
+        <!-- PREMIUM MAX -->
+        <div class="pricing-card max-plan">
+          <div class="max-tag">BEST VALUE</div>
+          <h3>Premium Max</h3>
+          <div class="price">€6.99<span>/month</span></div>
+          <p class="plan-note">Free shipping included</p>
+          <ul>
+            <li class="li-yes"><i data-lucide="check"></i> All Premium features</li>
+            <li class="li-yes"><i data-lucide="check"></i> Free shipping on all orders</li>
+            <li class="li-yes"><i data-lucide="check"></i> Swipe to discover books</li>
+            <li class="li-yes"><i data-lucide="check"></i> Extended radius (all Germany)</li>
+            <li class="li-yes"><i data-lucide="check"></i> Priority support</li>
+            <li class="li-yes"><i data-lucide="check"></i> Profile status badges</li>
+          </ul>
+          <a href="#" class="btn-primary">Go Max</a>
+        </div>
 
-  <!-- ===== EBAY PARTNERSHIP ===== -->
-  <section class="partnership">
-    <div class="container partnership-inner">
-      <div class="partner-text">
-        <span class="partner-badge"><i data-lucide="handshake"></i> Official Partner</span>
-        <h2>Can't Find It to Borrow? Buy It Sustainably.</h2>
-        <p>Bookshelf has partnered with eBay. If a book isn't available to borrow, you can jump directly to eBay to buy a second-hand copy — and eBay users can discover Bookshelf to lend books they already own.</p>
-        <a href="#" class="btn-primary">Explore on eBay <i data-lucide="arrow-right" style="width:16px;height:16px;vertical-align:middle;margin-left:4px;"></i></a>
-      </div>
-      <div class="partner-logo">
-        <div class="ebay-badge">ebay</div>
-        <p>× Bookshelf</p>
       </div>
     </div>
   </section>
